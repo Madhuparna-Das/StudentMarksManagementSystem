@@ -1,0 +1,167 @@
+include <stdio.h>
+#include <stdlib.h>
+#define MAX 5
+void add();
+void display();
+void search();
+void highest();
+void lowest();
+void update();
+struct student
+{
+    char name[20];
+    int roll;
+    int m1;
+};
+int c=0;
+char n[20];
+char name1[20];
+int marks;
+int x;
+
+struct student s[MAX];
+void add(){
+    fflush(stdin);
+    printf("\nEnter Name: ");
+    scanf("%s",&s[c].name);
+    fflush(stdin);
+    printf("\nEnter Roll No: ");
+    scanf("%d",&s[c].roll);
+    fflush(stdin);
+    printf("\nEnter marks of 1 subject: ");
+    scanf("%d",&s[c].m1);
+    fflush(stdin);
+    c++;
+}
+
+void display(){
+
+    for (x=0;x<c;x++){
+        printf("\n Name is %s",s[x].name);
+        printf("\n Roll No is %d",s[x].roll);
+        printf("\n marks is %d",s[x].m1);
+    }
+}
+
+void search(){
+    int f=0;
+    int x;
+    printf("\nEnter the name whose marks is to be searched: ");
+    scanf("%s",&n);
+    for(x=0;x<c;x++){
+        int res=strcmp(s[x].name,n);
+        {
+            if(res==0){
+                printf("\nthe marks obtained by %s is %d",n,s[x].m1);
+                f++;
+            }
+        }
+    }
+
+    if(f==0){
+        printf("\nsearch not found");
+    }
+}
+
+void highest()
+{
+    int max=s[0].m1,a;
+    for(x=0;x<c;x++){
+        if(s[x].m1>max){
+            max=s[x].m1;
+            a=x;
+        }
+    }
+    printf("\n the highest marks %d is obtained by %s,",max,s[a].name);
+}
+
+void lowest(){
+    int min=s[0].m1,a;
+    for(x=0;x<c;x++){
+        if(s[x].m1<min){
+            min=s[x].m1;
+            a=x;
+        }
+    }
+    printf("\n the highest marks %d is obtained by %s",min,s[a].name);
+}
+
+void update(){
+    fflush(stdin);
+    printf("\nenter the name whose marks is to be updated");
+    scanf("%s",name1);
+    fflush(stdin);
+    printf("\nenter marks which is to be updated");
+    scanf("%d",&marks);
+    fflush(stdin);
+    for(x=0;x<c;x++){
+        int res=strcmp(s[x].name,name1);
+        if(res==0){
+            s[x].m1=marks;
+        }
+    }
+    display();
+}
+
+int menu(){
+    fflush(stdin);
+    int ch;
+    printf("\n1. Add: ");
+    printf("\n2. Display: ");
+    printf("\n3. Search: ");
+    printf("\n4. Highest: ");
+    printf("\n5. Lowest: ");
+    printf("\n6. Update: ");
+    printf("\n7. Exit: ");
+    printf("\nEnter Choice: ");
+    scanf("%d",&ch);
+    return ch;   
+
+}
+
+int main()
+{
+    int ch;
+    char cnt;
+    while (1)
+    {
+        ch=menu();
+        if(ch==1){
+            add();
+            fflush(stdin);
+        }
+        else if(ch==2){
+            display();
+            fflush(stdin);
+        }
+        else if(ch==3){
+            search();
+            fflush(stdin);
+        }
+        else if(ch==4){
+            highest();
+            fflush(stdin);
+        }
+        else if(ch==5){
+            lowest();
+            fflush(stdin);
+        }
+        else if(ch==6){
+            update();
+            fflush(stdin);
+        }
+        else{
+            fflush(stdin);
+            printf("\nWoukd you like to continue: press y for yes and n for No");
+            scanf("%c",&cnt);
+            if(cnt=='y'){
+                continue;
+            }
+            else{
+                break;
+            }
+        }
+    }
+   return 0; 
+}
+
